@@ -14,18 +14,37 @@ header while providing a safe place for incremental redesign.
 3. Check menu assignments under **Appearance → Menus → Manage Locations**;
    WordPress stores menu-location assignments per theme.
 4. Confirm ACF fields, resources, and optional page elements still render.
-5. Add child-specific CSS and templates here rather than editing the parent.
+5. The homepage and first module-page template are in-progress migrations;
+   verify their menus and layouts before using them on production.
+6. Add future child-specific CSS and templates here rather than editing the
+   parent.
 
 ## Bootstrap
 
-The parent currently ships its own Bootstrap CSS and JavaScript. This child
-does not enqueue another Bootstrap version. A Bootstrap 5 migration should be
-planned separately: first inventory Bootstrap 3 classes and jQuery-dependent
-components, then migrate and validate templates before removing the parent's
-Bootstrap assets. Do not load Bootstrap 3 and 5 globally together.
+The parent currently ships Bootstrap 3.3.0 assets and jQuery-dependent
+integrations. The child uses pinned, local Bootstrap 5.3.8 assets on the `Home
+page` template and on module pages identified by the `spark_topic` page field.
+Those pages use a child-owned York-style header and footer. Module pages render
+their section menu, page content, resources, progress, and page navigation in a
+responsive Bootstrap 5 layout. Pages without `spark_topic` still use the
+parent's existing rendering. Bootstrap 3 styles and Bootstrap-specific
+integrations are dequeued on migrated pages. See
+[BOOTSTRAP5-MIGRATION.md](./BOOTSTRAP5-MIGRATION.md) for the migration
+requirements and acceptance checklist. Do not load Bootstrap 3 and 5 globally
+together.
+
+The module menu opens the branch containing the current page and closes other
+branches. Separate keyboard-accessible disclosure buttons let visitors open
+other sections without navigating away.
+
+The numeric `spark_topic` page field chooses the module menu. Values from 10
+through 19 select Getting Started; 20–29 select Exploring; 30–39 select
+Putting It Together; and 40 or greater select Faculty. For example, the
+assignment-requirements page has `spark_topic` set to `11`. This is existing
+page metadata; the template does not create or change the field.
 
 ## Scope
 
-This is a child-theme starting point, not the responsive redesign itself. The
-parent's fixed-width SPARK layout and existing interactions remain in effect
-until they are specifically overridden or replaced in the child.
+The homepage and `spark_topic` module pages have child-theme templates; other
+inherited SPARK pages still use the parent's existing layout and assets until
+they are specifically migrated in the child.
