@@ -13,6 +13,13 @@ function glendonits_spark_is_bootstrap5_page() {
 function glendonits_spark_child_enqueue_styles() {
     $bootstrap5_page = glendonits_spark_is_bootstrap5_page();
 
+    wp_enqueue_style(
+        'glendonits-spark-ibm-plex',
+        'https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@400;500;600;700&display=swap',
+        array(),
+        null
+    );
+
     if ( $bootstrap5_page ) {
         wp_dequeue_style( 'bootstrap' );
         wp_dequeue_style( 'smartmenus-style' );
@@ -87,9 +94,18 @@ function glendonits_spark_child_enqueue_styles() {
             filemtime( get_stylesheet_directory() . '/assets/js/module-navigation.js' ),
             true
         );
+        wp_add_inline_script(
+            'accordion-shortcodes-script',
+            'if ( Array.isArray( window.accordionShortcodesSettings ) ) {
+                window.accordionShortcodesSettings.forEach( function ( settings ) {
+                    settings.clickToClose = true;
+                } );
+            }',
+            'after'
+        );
     }
 
-    $style_dependencies = array( 'spark-accessibility' );
+    $style_dependencies = array( 'spark-accessibility', 'glendonits-spark-ibm-plex' );
     if ( $bootstrap5_page ) {
         $style_dependencies[] = 'glendonits-spark-bootstrap5';
     }

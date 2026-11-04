@@ -90,15 +90,18 @@ get_header();
 <main id="main-content" class="container py-4 spark-module-page" lang="<?php echo esc_attr( $spark_language ); ?>">
 	<div class="row g-3 align-items-start">
 		<aside class="col-12 spark-module-sidebar">
-			<a class="spark-module-york-logo" href="https://www.yorku.ca/" aria-label="<?php echo esc_attr( $is_french ? 'Université York' : 'York University' ); ?>">
-				<img
-					src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/yorku-logo.jpg' ); ?>"
-					alt="<?php echo esc_attr( $is_french ? 'Université York' : 'York University' ); ?>"
-					width="140"
-				>
-			</a>
 			<nav aria-label="<?php echo esc_attr( $is_french ? 'Navigation du module' : 'Module navigation' ); ?>">
-				<div class="spark-module-navigation">
+				<button
+					class="btn btn-outline-secondary w-100 spark-module-menu-mobile-toggle d-lg-none"
+					type="button"
+					data-bs-toggle="collapse"
+					data-bs-target="#spark-module-menu-collapse"
+					aria-controls="spark-module-menu-collapse"
+					aria-expanded="false"
+				>
+					<?php echo esc_html( $is_french ? 'Navigation du module' : 'Module navigation' ); ?>
+				</button>
+				<div class="spark-module-navigation collapse" id="spark-module-menu-collapse">
 					<?php
 					wp_nav_menu(
 						array(
@@ -114,7 +117,7 @@ get_header();
 			</nav>
 		</aside>
 
-		<section class="col-12 spark-module-main">
+		<section class="col-12 spark-module-main mt-2 p-4">
 			<div class="d-flex flex-column flex-sm-row align-items-sm-center justify-content-between gap-3 mb-2">
 				<a class="spark-module-logo" href="<?php echo esc_url( $spark_home_url ); ?>">
 					<img
@@ -185,7 +188,7 @@ get_header();
 				</div>
 			<?php endif; ?>
 
-				<div class="spark-module-progress mt-4">
+				<div class="spark-module-progress mt-5">
 					<div class="d-flex justify-content-between mb-1">
 						<span><?php echo esc_html( $is_french ? 'Progression' : 'Progress' ); ?></span>
 						<span><?php echo esc_html( $progress . '%' ); ?></span>
@@ -195,7 +198,7 @@ get_header();
 					</div>
 				</div>
 
-				<div class="spark-module-page-controls mt-3">
+				<div class="spark-module-page-controls mt-5">
 					<?php get_template_part( 'includes/module-page-navigation' ); ?>
 				</div>
 			</article>
