@@ -9,8 +9,8 @@ Text Domain: glendonits-spark-child
 */
 
 /*
- * The homepage uses a child-local Bootstrap 5 build. Other pages continue to
- * inherit the parent's Bootstrap 3 assets until they are migrated.
+ * The homepage, site map, and migrated module pages use a child-local
+ * Bootstrap 5 build. Other pages inherit the parent's Bootstrap 3 assets.
  */
 
 body {
@@ -336,7 +336,7 @@ body textarea {
 
 .spark-module-navigation {
   overflow: hidden;
-  border-radius: 0 10px 10px;
+  border-radius: 10px;
   background: linear-gradient(180deg, #960101, #c80303);
 }
 
@@ -363,10 +363,6 @@ body textarea {
   .spark-module-navigation.collapse:not(.show) {
     display: block;
   }
-
-  .spark-module-navigation {
-    min-height: 36rem;
-  }
 }
 
 .spark-module-navigation.collapsing {
@@ -382,14 +378,17 @@ body textarea {
 
 .spark-module-menu > .menu-nav-section-head {
   margin-top: 0 !important;
-  border-radius: 0 10px 0 0;
+  border-radius: 10px 0 0 0;
   background: #eee;
 }
 
 .spark-module-menu > .menu-nav-section-head > a {
   padding: 0.85rem 0.65rem;
   color: #960101;
-  font-weight: 900;
+  font-weight: 700;
+}
+.spark-module-navigation .spark-module-menu > .menu-nav-section-head > a {
+  font-size: 1.4rem;
 }
 
 .spark-module-menu > .menu-item {
@@ -403,6 +402,10 @@ body textarea {
 
 .spark-module-menu > .menu-item:not(.menu-nav-section-head) {
   background: linear-gradient(180deg, #960101, #c80303);
+}
+
+.spark-module-menu > .menu-item-has-children {
+  padding-bottom: 0;
 }
 
 .spark-module-menu > .menu-item:last-child {
@@ -424,6 +427,10 @@ body textarea {
   padding: 0.85rem 0.65rem;
   font-size: 1.05rem;
   font-weight: 700;
+}
+
+.spark-module-menu > .menu-top-module-spaced-out > a {
+  padding: 0.85rem 0.65rem !important;
 }
 
 .spark-module-menu .menu-item-has-children > a {
@@ -475,7 +482,7 @@ body textarea {
   padding: 0.55rem 0.65rem 0.55rem 1.1rem;
   color: #666;
   font-family: "IBM Plex Sans Condensed", "Arial Narrow", Arial, sans-serif;
-  font-size: 0.95rem;
+  font-size: 1.05rem;
   font-weight: 700;
 }
 
@@ -860,7 +867,7 @@ body textarea {
   background: linear-gradient(180deg, #960101, #c80303);
   color: #fff;
   cursor: pointer;
-  font-size: clamp(1.15rem, 2vw, 1.5rem);
+  font-size: clamp(1.15rem, 2vw, 2rem);
   font-weight: 700;
   line-height: 1.25;
   text-align: left;
@@ -1056,6 +1063,103 @@ body textarea {
 .spark-license-badge {
   width: 88px;
   height: 31px;
+}
+
+.spark-site-map-logo {
+  display: inline-block;
+  max-width: 46rem;
+}
+
+.spark-site-map-logo img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.spark-sitemap-content > div {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+  align-items: start;
+  gap: 1rem;
+  margin: 0 0 2rem !important;
+  padding: 1.25rem;
+  border: 1px solid #dee2e6;
+  border-top: 4px solid #e31837;
+  border-radius: 0.5rem;
+  background: #fff;
+  box-shadow: 0 0.15rem 0.45rem rgb(33 37 41 / 8%);
+}
+
+.spark-sitemap-content > div > h2 {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #dee2e6;
+  color: #212529;
+  font-size: clamp(1.5rem, 2.5vw, 2rem) !important;
+  font-weight: 700;
+  text-transform: none;
+}
+
+.spark-sitemap-content > div > div,
+.spark-sitemap-content > div > div > div:not(:has(> h3)) {
+  display: contents;
+}
+
+.spark-sitemap-content div:has(> h3) {
+  min-width: 0;
+  width: auto !important;
+  margin: 0;
+  padding: 1rem;
+  border: 1px solid #dee2e6;
+  border-radius: 0.375rem;
+  background: #f8f9fa;
+}
+
+.spark-sitemap-content div:empty {
+  display: none;
+}
+
+.spark-sitemap-content h3 {
+  margin: 0 0 0.75rem;
+  color: #343a40;
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.spark-sitemap-content ul {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.spark-sitemap-content li {
+  margin: 0;
+  padding: 0.35rem 0;
+  line-height: 1.4;
+}
+
+.spark-sitemap-content li + li {
+  border-top: 1px solid #e2e3e5;
+}
+
+.spark-sitemap-content li ul {
+  margin-top: 0.25rem;
+}
+
+.spark-sitemap-content a {
+  color: #333566;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.spark-sitemap-content a:hover {
+  color: #810001;
+}
+
+.spark-sitemap-content a:focus-visible {
+  outline: 3px solid #e31837;
+  outline-offset: 2px;
 }
 
 @media (max-width: 575.98px) {

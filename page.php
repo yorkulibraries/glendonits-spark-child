@@ -83,6 +83,27 @@ $caption_file = get_field( 'video_file_captions_' . $spark_language, $page_id );
 $mp4_file     = get_field( 'video_file_mac_' . $spark_language, $page_id );
 $transcript   = spark_get_transcript( $page_id, $spark_language );
 $progress     = max( 0, min( 100, (int) get_field( 'percent_completed', $page_id ) ) );
+$module_content = '';
+
+if ( $is_french ) {
+	$french_content = get_field( 'content_fr', $page_id );
+	if ( $french_content ) {
+		$module_content = apply_filters( 'the_content', $french_content );
+	}
+} else {
+	while ( have_posts() ) {
+		the_post();
+		$module_content .= apply_filters( 'the_content', get_the_content() );
+	}
+}
+
+$module_heading = '';
+if ( preg_match( '/<h1\b[^>]*>.*?<\/h1>/is', $module_content, $heading_match ) ) {
+	$module_heading = $heading_match[0];
+	$module_content = preg_replace( '/<h1\b[^>]*>.*?<\/h1>/is', '', $module_content, 1 );
+} else {
+	$module_heading = '<h1>' . esc_html( get_the_title( $page_id ) ) . '</h1>';
+}
 
 get_header();
 ?>
@@ -141,6 +162,8 @@ get_header();
 			</p>
 
 			<article class="spark-module-content">
+				<?php echo $module_heading; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+
 				<?php if ( $resources ) : ?>
 					<aside class="card spark-module-resources" aria-labelledby="spark-module-resources-title">
 						<h2 class="card-header h5 mb-0" id="spark-module-resources-title">
@@ -159,21 +182,7 @@ get_header();
 					</aside>
 				<?php endif; ?>
 
-			<?php if ( $is_french ) : ?>
-				<?php
-				$french_content = get_field( 'content_fr', $page_id );
-				if ( $french_content ) {
-					echo apply_filters( 'the_content', $french_content ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-				}
-				?>
-			<?php else : ?>
-				<?php
-				while ( have_posts() ) :
-					the_post();
-					the_content();
-				endwhile;
-				?>
-			<?php endif; ?>
+				<?php echo $module_content; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 
 			<?php if ( $video_file ) : ?>
 				<div class="spark-module-video my-4">

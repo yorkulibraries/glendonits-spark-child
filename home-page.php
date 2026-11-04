@@ -73,7 +73,7 @@ get_header();
 			</nav>
 		<?php endif; ?>
 
-		<section class="spark-homepage-content row g-4 align-items-start" aria-labelledby="spark-homepage-content-title px-2">
+		<section class="spark-homepage-content row g-4 align-items-start px-2" aria-labelledby="spark-homepage-content-title">
 			<h2 id="spark-homepage-content-title" class="visually-hidden">
 				<?php echo esc_html( $is_french ? 'Présentation de SPARK' : 'About SPARK' ); ?>
 			</h2>

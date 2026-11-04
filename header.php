@@ -16,6 +16,9 @@ $is_module_page = is_page() && (int) get_post_meta( get_queried_object_id(), 'sp
 $spark_language = isset( $_SESSION['slang'] ) && 'fr' === $_SESSION['slang'] ? 'fr' : 'en';
 $is_french      = 'fr' === $spark_language;
 $is_homepage    = is_page_template( 'home-page.php' );
+$document_title = is_page( 'site-map' )
+	? ( $is_french ? 'Plan du site SPARK' : 'SPARK Site Map' )
+	: 'York University';
 
 if ( $is_module_page ) :
 	?>
@@ -79,7 +82,7 @@ endif;
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="theme-color" content="#ffffff">
-	<title><?php echo esc_html( get_bloginfo( 'name' ) . ' | York University' ); ?></title>
+	<title><?php echo esc_html( get_bloginfo( 'name' ) . ' | ' . $document_title ); ?></title>
 	<?php wp_head(); ?>
 </head>
 <body <?php body_class( $is_homepage ? 'spark-child-home' : 'spark-child-page' ); ?>>

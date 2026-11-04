@@ -23,12 +23,13 @@ header while providing a safe place for incremental redesign.
 
 The parent currently ships Bootstrap 3.3.0 assets and jQuery-dependent
 integrations. The child uses pinned, local Bootstrap 5.3.8 assets on the `Home
-page` template and on module pages identified by the `spark_topic` page field.
-Those pages use a child-owned York-style header and footer. Module pages render
-their section menu, page content, resources, progress, and page navigation in a
-responsive Bootstrap 5 layout. Pages without `spark_topic` still use the
-parent's existing rendering. Bootstrap 3 styles and Bootstrap-specific
-integrations are dequeued on migrated pages. See
+page` template, the site map, and module pages identified by the `spark_topic`
+page field. Those pages use a child-owned York-style header and footer. Module
+pages render their section menu, page content, resources, progress, and page
+navigation in a responsive Bootstrap 5 layout. The site map preserves its
+CMS-managed links and arranges topics in responsive cards. Other pages without
+`spark_topic` still use the parent's existing rendering. Bootstrap 3 styles
+and Bootstrap-specific integrations are dequeued on migrated pages. See
 [BOOTSTRAP5-MIGRATION.md](./BOOTSTRAP5-MIGRATION.md) for the migration
 requirements and acceptance checklist. Do not load Bootstrap 3 and 5 globally
 together.
@@ -45,6 +46,6 @@ page metadata; the template does not create or change the field.
 
 ## Scope
 
-The homepage and `spark_topic` module pages have child-theme templates; other
-inherited SPARK pages still use the parent's existing layout and assets until
-they are specifically migrated in the child.
+The homepage, site map, and `spark_topic` module pages have child-theme
+templates; other inherited SPARK pages still use the parent's existing layout
+and assets until they are specifically migrated in the child.

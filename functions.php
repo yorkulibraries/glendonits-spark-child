@@ -3,7 +3,7 @@
  * Load child styles after the parent theme and its accessibility styles.
  */
 function glendonits_spark_is_bootstrap5_page() {
-	if ( is_page_template( 'home-page.php' ) ) {
+	if ( is_page_template( 'home-page.php' ) || is_page( 'site-map' ) ) {
 		return true;
 	}
 
@@ -12,10 +12,11 @@ function glendonits_spark_is_bootstrap5_page() {
 
 function glendonits_spark_child_enqueue_styles() {
     $bootstrap5_page = glendonits_spark_is_bootstrap5_page();
+    $module_page     = is_page() && (int) get_post_meta( get_queried_object_id(), 'spark_topic', true ) > 0;
 
     wp_enqueue_style(
         'glendonits-spark-ibm-plex',
-        'https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@400;500;600;700&display=swap',
+        'https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Sans+Condensed:wght@400;500;600;700&display=swap',
         array(),
         null
     );
@@ -62,7 +63,7 @@ function glendonits_spark_child_enqueue_styles() {
             filemtime( get_stylesheet_directory() . '/assets/js/homepage.js' ),
             true
         );
-    } elseif ( $bootstrap5_page ) {
+    } elseif ( $module_page ) {
         wp_enqueue_style(
             'glendonits-spark-module-dialog',
             get_template_directory_uri() . '/dialog.css',
@@ -109,7 +110,7 @@ function glendonits_spark_child_enqueue_styles() {
     if ( $bootstrap5_page ) {
         $style_dependencies[] = 'glendonits-spark-bootstrap5';
     }
-    if ( ! is_page_template( 'home-page.php' ) && $bootstrap5_page ) {
+    if ( $module_page ) {
         $style_dependencies[] = 'glendonits-spark-module-dialog';
         $style_dependencies[] = 'glendonits-spark-module-gui';
     }
